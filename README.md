@@ -1,68 +1,117 @@
-# Payload Blank Template
+# Senior Tech Support
 
-This template comes configured with the bare minimum to get started on anything you need.
+**A simple way for community centers to organize tech help from student volunteers.**
 
-## Quick start
+Center staff keep a record of the seniors they serve, post individual support tickets, and schedule group help days. Students request to join a center, take on work after approval, and log their volunteer hours. The app gives each group a focused view of the same program.
 
-This template can be deployed directly from our Cloud hosting and it will setup MongoDB and cloud S3 object storage for media.
-
-## Quick Start - local setup
-
-To spin up this template locally, follow these steps:
-
-### Clone
-
-After you click the `Deploy` button above, you'll want to have standalone copy of this repo on your machine. If you've already cloned this repo, skip to [Development](#development).
-
-### Development
-
-1. First [clone the repo](#clone) if you have not done so already
-2. `cd my-project && cp .env.example .env` to copy the example environment variables. You'll need to add the `MONGODB_URL` from your Cloud project to your `.env` if you want to use S3 storage and the MongoDB database that was created for you.
-
-3. `pnpm install && pnpm dev` to install dependencies and start the dev server
-4. open `http://localhost:3000` to open the app in your browser
-
-That's it! Changes made in `./src` will be reflected in your app. Follow the on-screen instructions to login and create your first admin user. Then check out [Production](#production) once you're ready to build and serve your app, and [Deployment](#deployment) when you're ready to go live.
-
-#### Docker (Optional)
-
-If you prefer to use Docker for local development instead of a local MongoDB instance, the provided docker-compose.yml file can be used.
-
-To do so, follow these steps:
-
-- Modify the `MONGODB_URL` in your `.env` file to `mongodb://127.0.0.1/<dbname>`
-- Modify the `docker-compose.yml` file's `MONGODB_URL` to match the above `<dbname>`
-- Run `docker-compose up` to start the database, optionally pass `-d` to run in the background.
+![Senior Tech Support home page](docs/screenshots/home.png)
 
 ## How it works
 
-The Payload config is tailored specifically to the needs of most websites. It is pre-configured in the following ways:
+1. **Join a center.** A student creates an account and requests membership at a senior center.
+2. **Get approved.** Staff review the request before the student can take work at that center.
+3. **Help a senior.** An approved student claims an open ticket or RSVPs to a group event.
+4. **Keep a record.** Ticket notes capture progress, while hour logs record the time volunteered.
 
-### Collections
+## Screenshots
 
-See the [Collections](https://payloadcms.com/docs/configuration/collections) docs for details on how to extend this functionality.
+### Student dashboard
 
-- #### Users (Authentication)
+Students see their assigned tickets, upcoming events, center memberships, and total logged hours.
 
-  Users are auth-enabled collections that have access to the admin panel.
+![Student dashboard with assigned tickets and center memberships](docs/screenshots/student-dashboard.png)
 
-  For additional help, see the official [Auth Example](https://github.com/payloadcms/payload/tree/3.x/examples/auth) or the [Authentication](https://payloadcms.com/docs/authentication/overview#authentication-overview) docs.
+### Open tickets
 
-- #### Media
+Students can browse and claim available appointments at centers where they are approved.
 
-  This is the uploads enabled collection. It features pre-configured sizes, focal point and manual resizing to help you manage your pictures.
+![Open tickets available to an approved student](docs/screenshots/open-tickets.png)
 
-### Docker
+### Staff dashboard
 
-Alternatively, you can use [Docker](https://www.docker.com) to spin up this template locally. To do so, follow these steps:
+Center staff can review pending volunteers, open tickets, upcoming events, and recent hours.
 
-1. Follow [steps 1 and 2 from above](#development), the docker-compose file will automatically use the `.env` file in your project root
-1. Next run `docker-compose up`
-1. Follow [steps 4 and 5 from above](#development) to login and create your first admin user
+![Staff dashboard showing volunteers, tickets, events, and hours](docs/screenshots/staff-dashboard.png)
 
-That's it! The Docker instance will help you get up and running quickly while also standardizing the development environment across your teams.
+### Volunteer approvals
 
-## Questions
+Staff decide which students can volunteer at their center.
 
-If you have any issues or questions, reach out to us on [Discord](https://discord.com/invite/payload) or start a [GitHub discussion](https://github.com/payloadcms/payload/discussions).
-# tech-support-senior
+![Staff view for approving center memberships](docs/screenshots/staff-memberships.png)
+
+_Screenshots show local demo data._
+
+## What is included
+
+- **Student experience:** registration, center requests, ticket claiming, event RSVPs, ticket notes, and hour logs.
+- **Staff experience:** senior profiles and visit history, volunteer approvals, tickets, group events, student records, and hours.
+- **Access control:** students work only at approved centers; center staff manage their assigned center; super admins manage the whole program, including centers and staff accounts.
+- **Admin tools:** a custom staff interface at `/staff` and a Payload admin panel at `/admin`.
+
+## Run locally
+
+You need **pnpm** and **MongoDB**; **Node.js 22** is recommended. Docker can run MongoDB if you do not have a local instance.
+
+1. Install dependencies and create a local environment file:
+
+   ```bash
+   pnpm install
+   cp .env.example .env
+   ```
+
+2. Set `DATABASE_URL` in `.env` to your MongoDB database and replace `PAYLOAD_SECRET` with a long random value. For the included Docker Compose MongoDB service, use:
+
+   ```dotenv
+   DATABASE_URL=mongodb://127.0.0.1:27017/senior-tech-support
+   PAYLOAD_SECRET=replace-with-a-long-random-secret
+   ```
+
+3. Start MongoDB, then the app:
+
+   ```bash
+   docker compose up -d mongo
+   pnpm dev
+   ```
+
+4. Open [http://localhost:3000](http://localhost:3000).
+
+The app seeds sample centers, users, tickets, events, and hour logs when Payload initializes. The seed checks for existing demo records so a normal restart does not recreate them.
+
+<details>
+<summary>Local demo accounts</summary>
+
+All three seeded accounts use the password `changeme`:
+
+- Student: `alex@student.edu`
+- Center staff: `maria@lakeside.org`
+- Super admin: `admin@example.com`
+
+These credentials are for local demos. Replace the seed credentials and secret before using the app with real people or data.
+
+</details>
+
+## Project structure
+
+```text
+src/
+├── app/(frontend)/       Student and staff pages, forms, and server actions
+├── app/(payload)/        Payload admin and API routes
+├── collections/          Program data models and collection permissions
+├── access/               Role and center access rules
+├── hooks/                Data validation and workflow rules
+└── seed/                 Local demo data
+```
+
+The app uses **Next.js**, **React**, **TypeScript**, **Payload CMS**, **MongoDB**, and **Tailwind CSS**. Payload access rules and hooks enforce membership approval, center scope, ticket assignment, RSVP limits, and valid hour-log links.
+
+## Development commands
+
+```bash
+pnpm dev          # Start the local app
+pnpm build        # Build for production
+pnpm lint         # Run ESLint
+pnpm test:int     # Run integration tests
+pnpm test:e2e     # Run browser tests
+```
+
+The browser tests use Playwright and expect MongoDB and the demo seed. If Chromium is missing, install it with `pnpm exec playwright install chromium`.
