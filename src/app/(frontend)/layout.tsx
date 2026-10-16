@@ -1,18 +1,16 @@
-import { Fraunces, Nunito } from 'next/font/google'
+import { DM_Sans, Outfit } from 'next/font/google'
 import React from 'react'
 
 import '../globals.css'
 
-const sans = Nunito({
+const sans = DM_Sans({
   subsets: ['latin'],
-  variable: '--font-nunito',
+  variable: '--font-dm-sans',
 })
 
-const display = Fraunces({
+const display = Outfit({
   subsets: ['latin'],
-  style: ['normal', 'italic'],
-  axes: ['SOFT', 'WONK'],
-  variable: '--font-fraunces',
+  variable: '--font-outfit',
 })
 
 export const metadata = {

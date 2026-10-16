@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { AuthPanel } from '@/app/(frontend)/components/AuthPanel'
 import { redirect } from 'next/navigation'
 
 import { LoginForm } from '@/app/(frontend)/components/LoginForm'
@@ -12,8 +13,13 @@ export default async function LoginPage() {
   if (isAdminUser(user)) redirect('/staff')
 
   return (
-    <div className="mx-auto w-full max-w-md pt-4">
-      <Card>
+    <div className="mx-auto grid w-full max-w-5xl items-stretch gap-6 pt-4 md:grid-cols-2">
+      <AuthPanel
+          label="Welcome back"
+          title="Good to see you again."
+          description="Your next chance to help, connect, and learn is just around the corner."
+        />
+      <Card className="justify-center">
         <CardHeader>
           <h1 className="text-4xl">Student login</h1>
           <CardDescription className="leading-relaxed">

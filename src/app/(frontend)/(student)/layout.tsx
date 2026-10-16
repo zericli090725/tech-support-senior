@@ -8,7 +8,7 @@ export default async function StudentLayout(props: { children: React.ReactNode }
   return (
     <div className="app-shell">
       <Header user={user} />
-      <main className="mx-auto w-full max-w-5xl px-6 pt-10 pb-24">{children}</main>
+      <main className="mx-auto w-full max-w-6xl px-5 pt-10 pb-24 sm:px-8">{children}</main>
     </div>
   )
 }

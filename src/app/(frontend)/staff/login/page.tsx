@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { AuthPanel } from '@/app/(frontend)/components/AuthPanel'
 import { redirect } from 'next/navigation'
 
 import { isAdminUser, isStudent } from '@/access/roles'
@@ -13,8 +14,13 @@ export default async function StaffLoginPage() {
   if (isStudent(user)) redirect('/dashboard')
 
   return (
-    <div className="mx-auto w-full max-w-md pt-4">
-      <Card>
+    <div className="mx-auto grid w-full max-w-5xl items-stretch gap-6 pt-4 md:grid-cols-2">
+      <AuthPanel
+          label="For center teams"
+          title="The little things add up."
+          description="Coordinate volunteers and give every neighbor the support they deserve."
+        />
+      <Card className="justify-center">
         <CardHeader>
           <h1 className="text-4xl">Staff login</h1>
           <CardDescription className="leading-relaxed">

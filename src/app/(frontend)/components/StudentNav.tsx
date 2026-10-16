@@ -15,7 +15,7 @@ export function StudentNav({ items }: { items: Item[] }) {
   const pathname = usePathname()
 
   return (
-    <nav className="flex flex-wrap items-center gap-1 rounded-full bg-secondary/80 p-1">
+    <nav className="flex flex-wrap items-center gap-1" aria-label="Student navigation">
       {items.map((item) => {
         const active =
           item.exact || item.href === '/'
@@ -28,10 +28,10 @@ export function StudentNav({ items }: { items: Item[] }) {
             href={item.href}
             aria-current={active ? 'page' : undefined}
             className={cn(
-              'rounded-full px-3 py-1.5 text-sm transition-colors',
+              'rounded-full px-3.5 py-2 text-sm font-semibold transition-colors',
               active
-                ? 'bg-card text-foreground shadow-sm'
-                : 'text-muted-foreground hover:text-foreground',
+                ? 'bg-[#fbe8e1] text-primary'
+                : 'text-muted-foreground hover:bg-secondary hover:text-foreground',
             )}
           >
             {item.label}

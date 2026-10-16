@@ -26,7 +26,7 @@ export function StaffNav({ superAdmin }: Props) {
   ]
 
   return (
-    <nav className="flex flex-wrap gap-1.5" aria-label="Staff">
+    <nav className="flex flex-wrap gap-1.5 rounded-[1.5rem] border border-border bg-card/75 p-2 shadow-[0_8px_24px_rgb(49_72_61_/_5%)]" aria-label="Staff">
       {items.map((item) => {
         const current =
           item.href === '/staff'
@@ -38,10 +38,10 @@ export function StaffNav({ superAdmin }: Props) {
             href={item.href}
             aria-current={current ? 'page' : undefined}
             className={cn(
-              'rounded-full px-3 py-1.5 text-sm transition-colors',
+              'rounded-full px-3.5 py-2 text-sm font-semibold transition-colors',
               current
-                ? 'bg-primary text-primary-foreground'
-                : 'bg-secondary text-secondary-foreground hover:bg-accent hover:text-accent-foreground',
+                ? 'bg-secondary text-secondary-foreground'
+                : 'text-muted-foreground hover:bg-muted hover:text-foreground',
             )}
           >
             {item.label}

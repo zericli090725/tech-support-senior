@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { AuthPanel } from '@/app/(frontend)/components/AuthPanel'
 import { redirect } from 'next/navigation'
 
 import { RegisterForm } from '@/app/(frontend)/components/RegisterForm'
@@ -12,8 +13,13 @@ export default async function RegisterPage() {
   if (isAdminUser(user)) redirect('/staff')
 
   return (
-    <div className="mx-auto w-full max-w-md pt-4">
-      <Card>
+    <div className="mx-auto grid w-full max-w-5xl items-stretch gap-6 pt-4 md:grid-cols-2">
+      <AuthPanel
+          label="Join the community"
+          title="Your skills can make someone smile."
+          description="A little patience and a bit of tech know-how can make a big difference close to home."
+        />
+      <Card className="justify-center">
         <CardHeader>
           <h1 className="text-4xl">Create a student account</h1>
           <CardDescription className="leading-relaxed">
