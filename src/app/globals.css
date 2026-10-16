@@ -164,3 +164,47 @@
 .app-shell ::selection {
   background: #dcefeb;
 }
+
+.gallery-stage {
+  perspective: 1400px;
+}
+
+.gallery-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 700ms cubic-bezier(0.22, 0.8, 0.22, 1);
+}
+
+.gallery-card[data-flipped='true'] {
+  transform: rotateY(180deg);
+}
+
+.gallery-side {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border: 6px solid white;
+  border-radius: 2rem;
+  background: white;
+  box-shadow: 0 22px 48px rgb(33 63 58 / 18%);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.gallery-side-back {
+  transform: rotateY(180deg);
+}
+
+.gallery-face {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-card {
+    transition: none;
+  }
+}

@@ -2,7 +2,7 @@
 
 **A simple way for community centers to organize tech help from student volunteers.**
 
-Center staff keep a record of the seniors they serve, post individual support tickets, and schedule group help days. Students request to join a center, take on work after approval, and log their volunteer hours. The app gives each group a focused view of the same program.
+Center staff keep a record of the seniors they serve, post individual support tickets, and schedule group help days. Students request to join a center, take on work after approval, and log their volunteer hours. The app gives each group a focused view of the same program. The home page features a photo gallery of community tech help moments.
 
 ![Senior Tech Support home page](docs/screenshots/home.png)
 
@@ -21,11 +21,11 @@ Students see their assigned tickets, upcoming events, center memberships, and to
 
 ![Student dashboard with assigned tickets and center memberships](docs/screenshots/student-dashboard.png)
 
-### Open tickets
+### Find a center
 
-Students can browse and claim available appointments at centers where they are approved.
+Students can browse participating centers and request to join a volunteer team.
 
-![Open tickets available to an approved student](docs/screenshots/open-tickets.png)
+![Center directory with volunteer opportunities](docs/screenshots/centers.png)
 
 ### Staff dashboard
 
@@ -39,7 +39,7 @@ Staff decide which students can volunteer at their center.
 
 ![Staff view for approving center memberships](docs/screenshots/staff-memberships.png)
 
-_Screenshots show local demo data._
+_Application screenshots show local demo data. The home page gallery uses photos from the project._
 
 ## What is included
 
@@ -96,6 +96,7 @@ These credentials are for local demos. Replace the seed credentials and secret b
 src/
 ├── app/(frontend)/       Student and staff pages, forms, and server actions
 ├── app/(payload)/        Payload admin and API routes
+├── assets/gallery/       Home page community photos
 ├── collections/          Program data models and collection permissions
 ├── access/               Role and center access rules
 ├── hooks/                Data validation and workflow rules

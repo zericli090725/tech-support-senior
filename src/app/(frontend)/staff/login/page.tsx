@@ -16,7 +16,7 @@ export default async function StaffLoginPage() {
   return (
     <div className="mx-auto grid w-full max-w-5xl items-stretch gap-6 pt-4 md:grid-cols-2">
       <AuthPanel
-          label="For center teams"
+          label="For center staff"
           title="The little things add up."
           description="Coordinate volunteers and give every neighbor the support they deserve."
         />
