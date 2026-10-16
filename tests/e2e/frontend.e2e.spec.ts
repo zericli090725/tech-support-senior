@@ -49,13 +49,26 @@ test.describe('Guest frontend', () => {
 })
 
 test.describe('New student', () => {
+  test('requires matching passwords to register', async ({ page }) => {
+    await page.goto('/register')
+    await page.getByRole('textbox', { name: 'Name' }).fill('E2E Student')
+    await page.getByRole('textbox', { name: 'Email' }).fill('e2e@student.edu')
+    await page.getByLabel('Password', { exact: true }).fill('changeme')
+    await page.getByLabel('Confirm password').fill('different')
+    await page.getByRole('button', { name: 'Create student account' }).click()
+
+    await expect(page.getByText('Passwords do not match.')).toBeVisible()
+    await expect(page).toHaveURL(/\/register/)
+  })
+
   test('can register, see empty dashboard, and request to join a center', async ({ page }) => {
     const email = `e2e-${Date.now()}@student.edu`
 
     await page.goto('/register')
     await page.getByRole('textbox', { name: 'Name' }).fill('E2E Student')
     await page.getByRole('textbox', { name: 'Email' }).fill(email)
-    await page.getByRole('textbox', { name: 'Password' }).fill('changeme')
+    await page.getByLabel('Password', { exact: true }).fill('changeme')
+    await page.getByLabel('Confirm password').fill('changeme')
     await page.getByRole('button', { name: 'Create student account' }).click()
 
     await expect(page).toHaveURL(/\/dashboard/)

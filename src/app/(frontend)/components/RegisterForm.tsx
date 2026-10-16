@@ -13,14 +13,21 @@ export function RegisterForm() {
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setError(null)
-    setPending(true)
 
     const form = event.currentTarget
     const formData = new FormData(form)
+    const password = formData.get('password')
+
+    if (password !== formData.get('confirmPassword')) {
+      setError('Passwords do not match.')
+      return
+    }
+
+    setPending(true)
     const payload = {
       name: formData.get('name'),
       email: formData.get('email'),
-      password: formData.get('password'),
+      password,
     }
 
     try {
@@ -65,7 +72,7 @@ export function RegisterForm() {
   return (
     <form className="flex flex-col gap-4" onSubmit={onSubmit}>
       <div className="flex flex-col gap-2">
-        <Label htmlFor="name">Name</Label>
+        <Label htmlFor="name">Full Name</Label>
         <Input id="name" name="name" type="text" autoComplete="name" required className="h-10" />
       </div>
       <div className="flex flex-col gap-2">
@@ -77,6 +84,18 @@ export function RegisterForm() {
         <Input
           id="password"
           name="password"
+          type="password"
+          autoComplete="new-password"
+          required
+          minLength={3}
+          className="h-10"
+        />
+      </div>
+      <div className="flex flex-col gap-2">
+        <Label htmlFor="confirmPassword">Confirm password</Label>
+        <Input
+          id="confirmPassword"
+          name="confirmPassword"
           type="password"
           autoComplete="new-password"
           required
