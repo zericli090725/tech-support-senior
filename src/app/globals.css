@@ -185,10 +185,8 @@
   position: absolute;
   inset: 0;
   overflow: hidden;
-  border: 6px solid white;
-  border-radius: 2rem;
-  background: white;
-  box-shadow: 0 22px 48px rgb(33 63 58 / 18%);
+  border-radius: 1.5rem;
+  background: #d3dfd5;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }

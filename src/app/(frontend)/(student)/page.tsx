@@ -61,10 +61,9 @@ export default async function HomePage() {
             )}
           </div>
         </div>
-        <div className="relative isolate mx-auto grid min-h-[31rem] w-full max-w-[39rem] place-items-center overflow-hidden rounded-[2.6rem] bg-[#dceee5] p-7 shadow-[0_30px_70px_rgb(49_72_61_/_12%)] sm:min-h-[36rem] sm:rounded-[3.5rem] sm:p-10 lg:ml-auto">
-          <div className="absolute -right-20 -top-20 size-72 rounded-full bg-[#f7dfcb]" aria-hidden="true" />
-          <div className="absolute -bottom-24 -left-20 size-72 rounded-full bg-[#abd8c8]" aria-hidden="true" />
-          <div className="absolute right-7 top-8 rotate-12 text-[#f5b897]" aria-hidden="true"><Sparkles className="size-16" strokeWidth={1.1} /></div>
+        <div className="relative isolate mx-auto grid w-full max-w-[39rem] place-items-center overflow-hidden rounded-[2.6rem] border border-[#dbe7dc] bg-[linear-gradient(145deg,#edf4ed_0%,#e4eee7_62%,#f3e9df_100%)] px-7 py-12 shadow-[0_30px_70px_rgb(49_72_61_/_10%)] sm:min-h-[35rem] sm:rounded-[3.5rem] sm:px-10 sm:py-14 lg:ml-auto">
+          <div className="pointer-events-none absolute -left-32 -top-32 size-80 rounded-full border-[3.5rem] border-white/35" aria-hidden="true" />
+          <div className="pointer-events-none absolute -bottom-32 -right-24 size-72 rounded-full bg-[#f5ded0]/55 blur-2xl" aria-hidden="true" />
           <HeroGallery />
         </div>
       </section>

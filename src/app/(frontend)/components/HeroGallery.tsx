@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { useState } from 'react'
 
 import communityFeedback from '@/assets/gallery/community-feedback.webp'
@@ -13,25 +13,21 @@ const photos = [
   {
     src: communityTeam,
     alt: 'Students, older adults, and community members together outside Seven Oaks Community Center',
-    caption: 'The people behind the help',
     position: 'center center',
   },
   {
     src: helpSession,
     alt: 'Students and older adults working together at tables during a community tech help session',
-    caption: 'Learning side by side',
     position: 'center center',
   },
   {
     src: techHelpSign,
     alt: 'A Tech Help sign inviting neighbors to sign up at Seven Oaks Center',
-    caption: 'A warm welcome starts here',
     position: 'center center',
   },
   {
     src: communityFeedback,
     alt: 'Paper feedback forms completed after tech help sessions',
-    caption: 'Every voice helps us grow',
     position: 'center 58%',
   },
 ] as const
@@ -69,73 +65,65 @@ export function HeroGallery() {
 
   return (
     <div
-      className="relative z-10 w-full max-w-[29rem]"
+      className="relative z-10 w-full max-w-[30rem]"
+      role="region"
+      aria-roledescription="carousel"
       aria-label="Community photo gallery"
     >
-      <div
-        id="hero-gallery-stage"
-        className="gallery-stage aspect-[4/3] w-full rotate-[-3deg]"
-      >
-        <div className="gallery-card" data-flipped={flipped}>
-          <div aria-hidden={flipped} className="gallery-side">
-            <PhotoFace photo={photos[frontIndex]} />
-          </div>
+      <div className="relative">
+        <div
+          className="pointer-events-none absolute inset-1 rotate-[3deg] translate-x-2 translate-y-3 rounded-[2rem] border border-[#e9ccbb] bg-[#f8e7dc] shadow-[0_12px_30px_rgb(79_75_54_/_8%)]"
+          aria-hidden="true"
+        />
+        <div className="relative rotate-[-2deg] rounded-[1.9rem] bg-white p-[7px] shadow-[0_24px_55px_rgb(28_66_55_/_20%)]">
           <div
-            aria-hidden={!flipped}
-            className="gallery-side gallery-side-back"
+            id="hero-gallery-stage"
+            className="gallery-stage relative aspect-[4/3] w-full overflow-hidden rounded-[1.5rem] bg-[#d3dfd5]"
           >
-            <PhotoFace photo={photos[backIndex]} />
+            <div className="gallery-card" data-flipped={flipped}>
+              <div aria-hidden={flipped} className="gallery-side">
+                <PhotoFace photo={photos[frontIndex]} />
+              </div>
+              <div
+                aria-hidden={!flipped}
+                className="gallery-side gallery-side-back"
+              >
+                <PhotoFace photo={photos[backIndex]} />
+              </div>
+            </div>
           </div>
         </div>
       </div>
-
-      <div className="mt-7 flex items-center justify-between gap-3 rounded-[1.4rem] border border-white bg-white/95 px-4 py-3 shadow-[0_12px_28px_rgb(33_63_58_/_10%)] sm:px-5">
-        <div className="min-w-0" aria-live="polite" aria-atomic="true">
-          <p className="text-[0.65rem] font-bold tracking-[0.13em] text-primary uppercase">
-            Community moments · {String(activeIndex + 1).padStart(2, '0')}/04
-          </p>
-          <p className="truncate font-heading text-base font-semibold text-foreground sm:text-lg">
-            {photos[activeIndex].caption}
-          </p>
+      <div className="relative mt-8 flex items-center justify-between px-1 sm:px-2">
+        <button
+          type="button"
+          aria-label="Previous photo"
+          aria-controls="hero-gallery-stage"
+          onClick={() =>
+            showPhoto((activeIndex - 1 + photos.length) % photos.length)
+          }
+          className="grid h-11 w-14 place-items-center rounded-[1rem] border border-[#bdd3c5] bg-[#fffdf8] text-[#245449] shadow-[0_6px_16px_rgb(38_78_61_/_8%)] transition-all hover:-translate-x-0.5 hover:border-[#245449] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+        >
+          <ArrowLeft className="size-5" strokeWidth={1.8} aria-hidden="true" />
+        </button>
+        <div className="flex items-center gap-2 font-heading text-sm font-semibold tracking-[0.12em] text-[#245449]" aria-hidden="true">
+          <span>{String(activeIndex + 1).padStart(2, '0')}</span>
+          <span className="h-px w-6 bg-[#8fb3a0]" />
+          <span className="text-[#7b9c8b]">{String(photos.length).padStart(2, '0')}</span>
         </div>
-        <div className="flex shrink-0 items-center gap-1.5">
-          <button
-            type="button"
-            aria-label="Previous photo"
-            aria-controls="hero-gallery-stage"
-            onClick={() =>
-              showPhoto((activeIndex - 1 + photos.length) % photos.length)
-            }
-            className="grid size-9 place-items-center rounded-full border border-border bg-card text-foreground transition-colors hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring sm:size-10"
-          >
-            <ChevronLeft className="size-5" aria-hidden="true" />
-          </button>
-          <button
-            type="button"
-            aria-label="Next photo"
-            aria-controls="hero-gallery-stage"
-            onClick={() => showPhoto((activeIndex + 1) % photos.length)}
-            className="grid size-9 place-items-center rounded-full bg-primary text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring sm:size-10"
-          >
-            <ChevronRight className="size-5" aria-hidden="true" />
-          </button>
-        </div>
+        <button
+          type="button"
+          aria-label="Next photo"
+          aria-controls="hero-gallery-stage"
+          onClick={() => showPhoto((activeIndex + 1) % photos.length)}
+          className="grid h-11 w-14 place-items-center rounded-[1rem] bg-[#245449] text-white shadow-[0_8px_18px_rgb(28_66_55_/_18%)] transition-all hover:translate-x-0.5 hover:bg-[#19463c] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+        >
+          <ArrowRight className="size-5" strokeWidth={1.8} aria-hidden="true" />
+        </button>
       </div>
-      <div
-        className="mt-4 flex justify-center gap-2"
-        aria-label="Choose a gallery photo"
-      >
-        {photos.map((photo, index) => (
-          <button
-            key={photo.caption}
-            type="button"
-            aria-label={`Show photo ${index + 1}: ${photo.caption}`}
-            aria-pressed={activeIndex === index}
-            onClick={() => showPhoto(index)}
-            className={`h-2 rounded-full transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring ${activeIndex === index ? 'w-6 bg-primary' : 'w-2 bg-[#8db9aa] hover:bg-[#4c8d7e]'}`}
-          />
-        ))}
-      </div>
+      <span className="sr-only" aria-live="polite">
+        Photo {activeIndex + 1} of {photos.length}
+      </span>
     </div>
   )
 }
