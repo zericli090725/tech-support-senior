@@ -1,5 +1,9 @@
 # Senior Tech Support
 
+I made this project to submit to the 2026 Congressional App Challenge. My member of Congress is Representative Scott Peters.
+
+<img src="docs/scott-peters.jpg" alt="Portrait of Representative Scott Peters" width="220">
+
 **A simple way for community centers to organize tech help from student volunteers.**
 
 Center staff keep a record of the seniors they serve, post individual support tickets, and schedule group help days. Students request to join a center, take on work after approval, and log their volunteer hours. The app gives each group a focused view of the same program. The home page features a photo gallery of community tech help moments.
