@@ -55,6 +55,8 @@ export default buildConfig({
   sharp,
   plugins: [],
   onInit: async (payload) => {
-    await seed(payload)
+    if (process.env.NODE_ENV !== 'production') {
+      await seed(payload)
+    }
   },
 })

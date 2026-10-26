@@ -25,7 +25,7 @@ type Device = 'phone' | 'tablet' | 'computer' | 'tv' | 'other'
 type TicketStatus = 'open' | 'assigned' | 'completed' | 'cancelled'
 type MembershipStatus = 'pending' | 'approved' | 'rejected'
 
-type WithId = { id: string | number }
+type WithId = { id: string }
 
 const centers = [
   {

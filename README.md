@@ -1,12 +1,14 @@
 # Senior Tech Support
 
-I made this project to submit to the 2026 Congressional App Challenge. My member of Congress is Representative Scott Peters.
+I built this project for the 2026 Congressional App Challenge in Representative Scott Peters's district. I am also working on a national instance. This repository shares the source code so students elsewhere can launch their own instance for the senior centers in their area.
 
 <img src="docs/scott-peters.jpg" alt="Portrait of Representative Scott Peters" width="220">
 
 **A simple way for community centers to organize tech help from student volunteers.**
 
 Center staff keep a record of the seniors they serve, post individual support tickets, and schedule group help days. Students request to join a center, take on work after approval, and log their volunteer hours. The app gives each group a focused view of the same program. The home page features a photo gallery of community tech help moments.
+
+Each deployment has its own database and center records. To run this for your community, follow [DEPLOY.md](DEPLOY.md). The included San Diego records and accounts are for local development; production starts without them.
 
 ![Senior Tech Support home page](docs/screenshots/home.png)
 
@@ -79,7 +81,7 @@ You need **pnpm** and **MongoDB**; **Node.js 22** is recommended. Docker can run
 
 4. Open [http://localhost:3000](http://localhost:3000).
 
-The app seeds sample centers, users, tickets, events, and hour logs when Payload initializes. The seed checks for existing demo records so a normal restart does not recreate them.
+In development, the app seeds sample centers, users, tickets, events, and hour logs when Payload initializes. The seed checks for existing demo records so a normal restart does not recreate them. Production does not run the demo seed.
 
 <details>
 <summary>Local demo accounts</summary>
@@ -90,9 +92,13 @@ All three seeded accounts use the password `changeme`:
 - Center staff: `maria@lakeside.org`
 - Super admin: `admin@example.com`
 
-These credentials are for local demos. Replace the seed credentials and secret before using the app with real people or data.
+These credentials are for local demos only. A fresh production database does not include these accounts; use a strong `PAYLOAD_SECRET` and create your own administrator.
 
 </details>
+
+## Bring it to your area
+
+Start with a fresh database, create your own administrator, and add your local centers and staff. Students can then register and request to join a center. Update the site name, gallery photos, and any local wording before sharing your instance. [DEPLOY.md](DEPLOY.md) gives students and coding agents the deployment steps and a launch checklist.
 
 ## Project structure
 
